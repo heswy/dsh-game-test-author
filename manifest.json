@@ -1,0 +1,41 @@
+{
+  "manifestVersion": 1,
+  "id": "ember-drift",
+  "name": "Ember Drift",
+  "version": "1.0.0",
+  "author": {
+    "name": "heswy"
+  },
+  "description": "A two-minute hand-painted space dodge. Weave through the emberfall, gather fallen stars, and keep the little skiff alight.",
+  "categories": [
+    "arcade",
+    "action"
+  ],
+  "capabilities": [
+    "storage",
+    "score"
+  ],
+  "sdkVersion": "^1.0.0",
+  "runtimeVersion": "^1.0.0",
+  "preferredTheme": "game-defined",
+  "viewport": {
+    "width": 1280,
+    "height": 720,
+    "fit": "contain"
+  },
+  "tags": [
+    "space",
+    "dodge",
+    "hand-painted",
+    "short-session"
+  ],
+  "score": {
+    "direction": "higher-better",
+    "min": 0,
+    "max": 1000000,
+    "integer": true
+  },
+  "save": {
+    "schemaVersion": 1
+  }
+}

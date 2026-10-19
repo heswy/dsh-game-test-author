@@ -1,0 +1,163 @@
+/*
+ * Ember Drift — full-bleed Runtime presentation.
+ *
+ * The canvas paints the entire viewport; there is no stage frame, letterbox or
+ * fixed 960x540 box. The palette is exposed as CSS custom properties so the
+ * canvas renderer follows DSH light/dark mode from the same source of truth.
+ */
+:root {
+  color-scheme: dark;
+  --bg: #140d12;
+  --stage: #1a1017;
+  --ink: #f7e8d6;
+  --muted: #c2a690;
+  --ember: #ff9b5e;
+  --ember-strong: #ffd6a5;
+  --star: #ffd27a;
+  --rose: #f0708a;
+  --panel: rgba(36, 22, 27, 0.9);
+  --line: rgba(255, 225, 190, 0.18);
+  --nebula-a: rgba(214, 94, 58, 0.22);
+  --nebula-b: rgba(94, 64, 132, 0.24);
+  --moon: #ffcf9f;
+  --moon-glow: rgba(255, 170, 100, 0.22);
+  --horizon: rgba(90, 36, 40, 0.55);
+  --paper: rgba(255, 235, 205, 0.055);
+  --vignette: rgba(8, 4, 8, 0.55);
+  --rock-hi: #7d5148;
+  --rock-lo: #2b1a24;
+  --rock-line: #140c12;
+  --ship-1: #ffe0b0;
+  --ship-2: #dd7247;
+  --ship-line: rgba(70, 30, 20, 0.75);
+  --hud-shadow: rgba(10, 5, 8, 0.55);
+}
+
+html[data-theme='light'] {
+  color-scheme: light;
+  --bg: #f3e4cf;
+  --stage: #f8ecd9;
+  --ink: #3b241c;
+  --muted: #7e5a46;
+  --ember: #c35a2f;
+  --ember-strong: #8f3a1c;
+  --star: #b3741c;
+  --rose: #a83349;
+  --panel: rgba(255, 248, 235, 0.92);
+  --line: rgba(90, 52, 32, 0.22);
+  --nebula-a: rgba(226, 158, 106, 0.36);
+  --nebula-b: rgba(193, 112, 100, 0.2);
+  --moon: #f2c08a;
+  --moon-glow: rgba(224, 140, 80, 0.18);
+  --horizon: rgba(214, 160, 110, 0.34);
+  --paper: rgba(80, 45, 25, 0.07);
+  --vignette: rgba(120, 70, 40, 0.2);
+  --rock-hi: #bd8a66;
+  --rock-lo: #7b503f;
+  --rock-line: #43261f;
+  --ship-1: #fff1d6;
+  --ship-2: #c55b32;
+  --ship-line: rgba(80, 36, 20, 0.8);
+  --hud-shadow: rgba(255, 245, 225, 0.6);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  background: var(--bg);
+  color: var(--ink);
+  font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Hiragino Sans GB',
+    'Microsoft YaHei', sans-serif;
+}
+
+/*
+ * The Runtime iframe is edge-to-edge. #app is an absolute fill so the canvas
+ * always owns the full viewport (including 100dvh browser cases) and there is
+ * no internal letterbox or outer stage border.
+ */
+#app {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  background: var(--bg);
+}
+
+#game {
+  display: block;
+  width: 100%;
+  height: 100%;
+  border: 0;
+  border-radius: 0;
+  background: var(--stage);
+  outline: none;
+  touch-action: none;
+}
+
+#game:focus-visible {
+  box-shadow: inset 0 0 0 3px rgba(255, 155, 94, 0.35);
+}
+
+/*
+ * Hint pill: bottom-left only. It stops 112px from the right edge so it never
+ * sits underneath the bottom-right 96x96 Agent presence control (or its
+ * expanded bubble). It is informational; all actions are keyboard-driven.
+ */
+.hint {
+  position: absolute;
+  left: 16px;
+  right: 112px;
+  bottom: 14px;
+  z-index: 2;
+  margin: 0;
+  padding: 6px 12px;
+  width: fit-content;
+  max-width: calc(100% - 128px);
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  background: var(--panel);
+  color: var(--muted);
+  font-size: 12px;
+  line-height: 1.35;
+  white-space: normal;
+  pointer-events: none;
+  user-select: none;
+  -webkit-backdrop-filter: blur(8px);
+  backdrop-filter: blur(8px);
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+@media (max-width: 520px) {
+  .hint {
+    left: 12px;
+    right: 104px;
+    bottom: 10px;
+    max-width: calc(100% - 116px);
+    padding: 5px 10px;
+    font-size: 11px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * {
+    scroll-behavior: auto !important;
+  }
+}

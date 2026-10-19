@@ -1,0 +1,14 @@
+{
+  "name": "ember-drift",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "A two-minute hand-painted space dodge: weave through falling asteroids, gather ember stars, chase a high score.",
+  "scripts": {
+    "build": "node scripts/build.mjs",
+    "dev": "node scripts/dev.mjs",
+    "validate": "node scripts/validate.mjs",
+    "pack": "node scripts/pack.mjs",
+    "publish": "node scripts/publish.mjs"
+  }
+}

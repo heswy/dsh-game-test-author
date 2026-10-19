@@ -1,0 +1,22 @@
+<!doctype html>
+<html lang="en" data-theme="dark">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <meta name="color-scheme" content="dark light" />
+    <title>Ember Drift</title>
+    <link rel="stylesheet" href="src/styles.css" />
+  </head>
+  <body>
+    <main id="app">
+      <canvas
+        id="game"
+        tabindex="0"
+        aria-label="Ember Drift: drift a small skiff left and right, dodge falling asteroids and collect warm stars for two minutes"
+      ></canvas>
+      <p class="hint" id="hint"></p>
+      <p class="sr-only" id="announcer" aria-live="polite"></p>
+    </main>
+    <script type="module" src="src/main.js"></script>
+  </body>
+</html>
