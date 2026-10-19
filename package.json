@@ -1,6 +1,6 @@
 {
   "name": "ember-drift",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "private": true,
   "type": "module",
   "description": "A two-minute hand-painted space dodge: weave through falling asteroids, gather ember stars, chase a high score.",
